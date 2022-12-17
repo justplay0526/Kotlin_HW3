@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Lab7_List_Kotlin</string>
+
+    <integer-array name="trans_image_list">
+        <item>@drawable/trans1</item>
+        <item>@drawable/trans2</item>
+        <item>@drawable/trans3</item>
+        <item>@drawable/trans4</item>
+        <item>@drawable/trans5</item>
+        <item>@drawable/trans6</item>
+    </integer-array>
+
+</resources>
