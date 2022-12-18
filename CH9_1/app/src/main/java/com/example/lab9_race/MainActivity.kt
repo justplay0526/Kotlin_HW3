@@ -6,33 +6,28 @@ import android.os.Handler
 import android.os.Looper
 import android.os.Message
 import android.widget.*
+import com.example.lab9_race.databinding.ActivityMainBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
-
+    private lateinit var binding: ActivityMainBinding
     private var progressRabbit = 0
     private var progressTurtle = 0
 
-    private lateinit var btn_start: Button
-    private lateinit var sb_rabbit: SeekBar
-    private lateinit var sb_turtle: SeekBar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        btn_start = findViewById(R.id.btn_start)
-        sb_rabbit = findViewById(R.id.sb_rabbit)
-        sb_turtle = findViewById(R.id.sb_turtle)
-
-        btn_start.setOnClickListener {
-            btn_start.isEnabled = false
+        binding.btnStart.setOnClickListener {
+            binding.btnStart.isEnabled = false
             progressRabbit = 0
             progressTurtle = 0
-            sb_rabbit.progress = 0
-            sb_turtle.progress = 0
+            binding.sbRabbit.progress = 0
+            binding.sbTurtle.progress = 0
             runRabbit()
             runTurtle()
         }
@@ -45,11 +40,11 @@ class MainActivity : AppCompatActivity() {
     private val handler = Handler(Looper.getMainLooper()) { msg ->
 
         if (msg.what == 1)
-            sb_rabbit.progress = progressRabbit
+            binding.sbRabbit.progress = progressRabbit
 
         if (progressRabbit >= 100 && progressTurtle < 100) {
             showToast("兔子勝利")
-            btn_start.isEnabled = true
+            binding.btnStart.isEnabled = true
         }
         true
     }
@@ -79,10 +74,10 @@ class MainActivity : AppCompatActivity() {
             while (progressTurtle < 100 && progressRabbit < 100) {
                 delay(100)
                 progressTurtle += 1
-                sb_turtle.progress = progressTurtle
+                binding.sbTurtle.progress = progressTurtle
                 if (progressTurtle >= 100 && progressRabbit < 100) {
                     showToast("烏龜勝利")
-                    btn_start.isEnabled = true
+                    binding.btnStart.isEnabled = true
                 }
             }
         }
