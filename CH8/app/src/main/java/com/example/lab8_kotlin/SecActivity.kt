@@ -33,7 +33,7 @@ class SecActivity : AppCompatActivity() {
             }
         }
     }
-    //建立 showToast 方法顯示 Toast 訊息
+
     private fun showToast(msg: String) =
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
 }
